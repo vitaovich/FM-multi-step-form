@@ -1,13 +1,14 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+import { Ubuntu } from '@next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const ubuntu = Ubuntu({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-ubuntu'  })
 
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>Multi Step Form</title>
+      </Head>
       <h1 className="text-3xl">
         Starter NextJS TailwindCSS
       </h1>
