@@ -1,18 +1,32 @@
 import Head from 'next/head'
-import { Ubuntu } from '@next/font/google'
+import { useState } from 'react'
 import Sidebar from '../components/sideBar'
+import StepForm from './stepForm'
 
-const ubuntu = Ubuntu({ subsets: ['latin'], weight: ['400', '500', '700'], variable: '--font-ubuntu' })
 
 export default function Home() {
+  const [steps, setSteps] = useState<{title: string, description: string}[]> ([
+    {title: 'Personal info', description: 'Please provide your name, email address, and phone number.'},
+    // {title: 'Select your plan', description: 'You have the option of monthly or yearly billing.'},
+    // {title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
+    // {title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
+  ])
   return (
     <>
       <Head>
         <title>Multi Step Form</title>
       </Head>
-      <div className='flex items-center justify-center h-screen bg-Magnolia'>
-        <div className='flex bg-white rounded-md'>
-          <Sidebar></Sidebar>
+      <div className='flex items-center justify-center h-screen bg-Magnolia font-ubuntu'>
+        <div className='bg-white rounded-md text-MarineBlue mx-4 p-6'>
+          {/* <Sidebar></Sidebar> */}
+          {
+            steps.map((step) => (
+              <StepForm key={step.title} title={step.title} description={step.description}/>
+            ))
+          }
+
+
+
         </div>
 
       </div>
