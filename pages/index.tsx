@@ -11,6 +11,17 @@ export default function Home() {
     // {title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
     // {title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
   ])
+
+  const [personalInfo, setPersonalInf] = useState<{name: string}>({name: ''})
+
+  const addPersonalInfoHandler = (name: string) => {
+    const newPersonalInfo = name
+
+    setPersonalInf((prevPersonalInfo) => {
+      return prevPersonalInfo.name = newPersonalInfo
+    })
+  }
+
   return (
     <>
       <Head>
@@ -21,7 +32,7 @@ export default function Home() {
           {/* <Sidebar></Sidebar> */}
           {
             steps.map((step) => (
-              <StepForm key={step.title} title={step.title} description={step.description}/>
+              <StepForm key={step.title} title={step.title} description={step.description} addPersonalInfoHandler={addPersonalInfoHandler} />
             ))
           }
 
