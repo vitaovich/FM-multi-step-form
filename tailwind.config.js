@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        'sidebar-mobile': "url('../public/images/bg-sidebar-mobile.svg')"
+      },
       colors: {
         // Primary
         MarineBlue: 'hsl(213, 96%, 18%)',
