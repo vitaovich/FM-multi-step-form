@@ -9,7 +9,7 @@ import Sidebar from '../components/sideBar'
 export default function Home() {
   const [steps, setSteps] = useState<{title: string, description: string}[]> ([
     {title: 'Personal info', description: 'Please provide your name, email address, and phone number.'},
-    // {title: 'Select your plan', description: 'You have the option of monthly or yearly billing.'},
+    {title: 'Select your plan', description: 'You have the option of monthly or yearly billing.'},
     // {title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
     // {title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
   ])
@@ -24,6 +24,15 @@ export default function Home() {
     })
   }
 
+  const getCurrentStepComponent = (title: string) => {
+    switch(title) {
+      case 'Personal info' : 
+        return <StepOneForm addPersonalInfoHandler={addPersonalInfoHandler} />
+      default:
+        return <div>TODO component</div>
+    }
+  }
+
   return (
     <>
       <Head>
@@ -35,7 +44,7 @@ export default function Home() {
           {
             steps.map((step) => (
               <StepContainer key={step.title} title={step.title} description={step.description}> 
-                <StepOneForm addPersonalInfoHandler={addPersonalInfoHandler} />
+                { getCurrentStepComponent(step.title) }
               </ StepContainer>
             ))
           }
