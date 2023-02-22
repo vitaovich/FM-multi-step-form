@@ -1,37 +1,37 @@
-import React, { ChangeEvent, FocusEvent,ChangeEventHandler, FocusEventHandler, useRef, useState } from "react";
+import useInput from "@/hooks/use-input";
+import React, { ChangeEvent, FocusEvent, ChangeEventHandler, FocusEventHandler, useRef, useState } from "react";
 
 const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHandler: (name: string) => void }> = (props) => {
     // const nameTextInputRef = useRef<HTMLInputElement>(null);
-    const [enteredName, setEnteredName] = useState<string>('');
-    const [enteredNameIsTouched, setEnteredNameIsTouched] = useState<boolean>(false);
-
-    const enteredNameIsValid = enteredName.trim() !== '';
-    const nameInputIsInvalid = !enteredNameIsValid && enteredNameIsTouched;
-
-    const nameInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setEnteredName(event.currentTarget.value)
+    const {
+        value: enteredName,
+        isValid: enteredNameIsValid,
+        hasError: nameInputHasError,
+        valueChangeHandler: nameChangedHandler,
+        inputBlurHandler: nameBlurHandler,
+        reset: resetNameInput
     }
+    = useInput(value => value.trim() !== '');
 
-    const nameInputBlurHandler = (_event: FocusEvent<HTMLInputElement>) => {
-        setEnteredNameIsTouched(true)
+    let formIsValid = false
+
+    if (enteredNameIsValid) {
+        formIsValid = true
     }
 
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
 
-        setEnteredNameIsTouched(true)
-
-        if (!enteredNameIsValid) {
+        if (!formIsValid) {
             return
         }
-
         console.log(enteredName)
 
-        setEnteredNameIsTouched(false)
+        resetNameInput()
     }
 
 
-    const nameInputClasses = nameInputIsInvalid
+    const nameInputClasses = nameInputHasError
         ? 'border-StrawberryRed' : 'border-LightGray';
 
     return (
@@ -43,14 +43,15 @@ const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHa
                 <div className='flex flex-col space-y-2'>
                     <div className="flex flex-row justify-between">
                         <label htmlFor='name' className=''>Name</label>
-                        {nameInputIsInvalid && <p className="text-StrawberryRed">This field is required</p>}
+                        {nameInputHasError && <p className="text-StrawberryRed">This field is required</p>}
                     </div>
                     <input
                         id='name'
                         type="text"
                         // ref={nameTextInputRef}
-                        onChange={nameInputChangeHandler}
-                        onBlur={nameInputBlurHandler}
+                        onChange={nameChangedHandler}
+                        onBlur={nameBlurHandler}
+                        value={enteredName}
                         placeholder="e.g. Stephen King"
                         className={`border  rounded-md px-4 py-2 placeholder:font-bold ${nameInputClasses}`}
                     />
