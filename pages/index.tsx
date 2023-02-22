@@ -1,7 +1,8 @@
+import PersonalInfo from '@/models/PersonalInfo'
 import Head from 'next/head'
 import { useState } from 'react'
 import Sidebar from '../components/sideBar'
-import StepForm from './stepForm'
+import StepForm from '../components/stepForm'
 
 
 export default function Home() {
@@ -12,13 +13,13 @@ export default function Home() {
     // {title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
   ])
 
-  const [personalInfo, setPersonalInf] = useState<{name: string}>({name: ''})
+  const [personalInfo, setPersonalInf] = useState<PersonalInfo>(new PersonalInfo())
 
   const addPersonalInfoHandler = (name: string) => {
-    const newPersonalInfo = name
+    const newPersonalInfo = new PersonalInfo(name)
 
-    setPersonalInf((prevPersonalInfo) => {
-      return prevPersonalInfo.name = newPersonalInfo
+    setPersonalInf((prevPersonalInfo: PersonalInfo) => {
+      return prevPersonalInfo = newPersonalInfo
     })
   }
 
