@@ -1,8 +1,8 @@
+import StepForm from '@/components/stepForm'
 import PersonalInfo from '@/models/PersonalInfo'
 import Head from 'next/head'
 import { useState } from 'react'
 import Sidebar from '../components/sideBar'
-import StepForm from '../components/stepForm'
 
 
 export default function Home() {
@@ -15,8 +15,8 @@ export default function Home() {
 
   const [personalInfo, setPersonalInf] = useState<PersonalInfo>(new PersonalInfo())
 
-  const addPersonalInfoHandler = (name: string) => {
-    const newPersonalInfo = new PersonalInfo(name)
+  const addPersonalInfoHandler = (name: string, email: string, phone: string) => {
+    const newPersonalInfo = new PersonalInfo(name, email, phone)
 
     setPersonalInf((prevPersonalInfo: PersonalInfo) => {
       return prevPersonalInfo = newPersonalInfo

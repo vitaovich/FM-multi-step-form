@@ -2,7 +2,7 @@ import useInput from "@/hooks/use-input";
 import React, { ChangeEvent, FocusEvent, ChangeEventHandler, FocusEventHandler, useRef, useState } from "react";
 import StepFormInput from "./stepFormInput";
 
-const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHandler: (name: string) => void }> = (props) => {
+const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHandler: (name: string, email: string, phone: string) => void }> = (props) => {
     const {
         value: enteredName,
         isValid: enteredNameIsValid,
@@ -11,11 +11,29 @@ const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHa
         inputBlurHandler: nameBlurHandler,
         reset: resetNameInput
     }
-    = useInput(value => value.trim() !== '');
+        = useInput(value => value.trim() !== '');
+    const {
+        value: enteredEmail,
+        isValid: enteredEmailIsValid,
+        hasError: emailInputHasError,
+        valueChangeHandler: emailChangedHandler,
+        inputBlurHandler: emailBlurHandler,
+        reset: resetEmailInput
+    }
+        = useInput(value => value.trim() !== '');
+    const {
+        value: enteredPhoneNum,
+        isValid: enteredPhoneNumIsValid,
+        hasError: phoneNumInputHasError,
+        valueChangeHandler: phoneNumChangedHandler,
+        inputBlurHandler: phoneNumBlurHandler,
+        reset: resetPhoneNumInput
+    }
+        = useInput(value => value.trim() !== '');
 
     let formIsValid = false
 
-    if (enteredNameIsValid) {
+    if (enteredNameIsValid && enteredEmailIsValid && enteredPhoneNumIsValid) {
         formIsValid = true
     }
 
@@ -25,44 +43,48 @@ const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHa
         if (!formIsValid) {
             return
         }
-        console.log(enteredName)
+        props.addPersonalInfoHandler(enteredName, enteredEmail, enteredPhoneNum)
 
-        resetNameInput()
+        // resetNameInput()
+        // resetEmailInput()
+        // resetPhoneNumInput()
     }
-
-    const nameInputClasses = nameInputHasError
-        ? 'border-StrawberryRed' : 'border-LightGray';
-
     return (
         <>
             <h1 className='text-4xl'>{props.title}</h1>
             <p className='text-CoolGray text-lg'>{props.description}</p>
 
             <form onSubmit={submitHandler}>
-                {/* <div className='flex flex-col space-y-2'>
-                    <div className="flex flex-row justify-between">
-                        <label htmlFor='name' className=''>Name</label>
-                        {nameInputHasError && <p className="text-StrawberryRed">This field is required</p>}
-                    </div>
-                    <input
-                        id='name'
-                        type="text"
-                        onChange={nameChangedHandler}
-                        onBlur={nameBlurHandler}
-                        value={enteredName}
-                        placeholder="e.g. Stephen King"
-                        className={`border  rounded-md px-4 py-2 placeholder:font-bold ${nameInputClasses}`}
-                    />
-                </div> */}
-                <StepFormInput 
+                <StepFormInput
                     label={"Name"}
                     validationMessage={"This field is required."}
                     value={enteredName}
                     hasError={nameInputHasError}
                     changeHandler={nameChangedHandler}
                     blurHandler={nameBlurHandler}
-                    id={"name"} 
-                    placeHolder={"e.g. Stephen King"} />
+                    id={"name"}
+                    placeHolder={"e.g. Stephen King"}
+                />
+                <StepFormInput
+                    label={"Email Address"}
+                    validationMessage={"This field is required."}
+                    value={enteredEmail}
+                    hasError={emailInputHasError}
+                    changeHandler={emailChangedHandler}
+                    blurHandler={emailBlurHandler}
+                    id={"email"}
+                    placeHolder={"e.g. stephenking@lorem.com"}
+                />
+                <StepFormInput
+                    label={"Phone Number"}
+                    validationMessage={"This field is required."}
+                    value={enteredPhoneNum}
+                    hasError={phoneNumInputHasError}
+                    changeHandler={phoneNumChangedHandler}
+                    blurHandler={phoneNumBlurHandler}
+                    id={"phone"}
+                    placeHolder={"e.g. +1 234 567 890"}
+                />
                 <button>submit</button>
             </form>
         </>
