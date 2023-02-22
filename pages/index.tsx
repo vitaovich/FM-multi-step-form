@@ -1,7 +1,8 @@
-import StepForm from '@/components/stepForm'
+import StepContainer from '@/components/stepContainer'
+import StepOneForm from '@/components/stepOneForm'
 import PersonalInfo from '@/models/PersonalInfo'
 import Head from 'next/head'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Sidebar from '../components/sideBar'
 
 
@@ -17,7 +18,7 @@ export default function Home() {
 
   const addPersonalInfoHandler = (name: string, email: string, phone: string) => {
     const newPersonalInfo = new PersonalInfo(name, email, phone)
-
+    console.log(newPersonalInfo)
     setPersonalInf((prevPersonalInfo: PersonalInfo) => {
       return prevPersonalInfo = newPersonalInfo
     })
@@ -33,12 +34,12 @@ export default function Home() {
           {/* <Sidebar></Sidebar> */}
           {
             steps.map((step) => (
-              <StepForm key={step.title} title={step.title} description={step.description} addPersonalInfoHandler={addPersonalInfoHandler} />
+              <StepContainer key={step.title} title={step.title} description={step.description}> 
+                <StepOneForm addPersonalInfoHandler={addPersonalInfoHandler} />
+              </ StepContainer>
             ))
           }
-
-
-
+          
         </div>
 
       </div>
