@@ -1,5 +1,6 @@
 import StepContainer from '@/components/stepContainer'
 import StepOneForm from '@/components/stepOneForm'
+import StepTwoForm from '@/components/stepTwoForm'
 import PersonalInfo from '@/models/PersonalInfo'
 import Head from 'next/head'
 import React, { useState } from 'react'
@@ -7,11 +8,11 @@ import Sidebar from '../components/sideBar'
 
 
 export default function Home() {
-  const [steps, setSteps] = useState<{title: string, description: string}[]> ([
-    {title: 'Personal info', description: 'Please provide your name, email address, and phone number.'},
-    {title: 'Select your plan', description: 'You have the option of monthly or yearly billing.'},
-    // {title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
-    // {title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
+  const [steps, setSteps] = useState<{num: number, title: string, description: string}[]> ([
+    // {num: 1, title: 'Personal info', description: 'Please provide your name, email address, and phone number.'},
+    {num: 2, title: 'Select your plan', description: 'You have the option of monthly or yearly billing.'},
+    // {num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
+    // {num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
   ])
 
   const [personalInfo, setPersonalInf] = useState<PersonalInfo>(new PersonalInfo())
@@ -24,10 +25,12 @@ export default function Home() {
     })
   }
 
-  const getCurrentStepComponent = (title: string) => {
-    switch(title) {
-      case 'Personal info' : 
+  const getCurrentStepComponent = (step: number) => {
+    switch(step) {
+      case 1 : 
         return <StepOneForm addPersonalInfoHandler={addPersonalInfoHandler} />
+      case 2 : 
+        return <StepTwoForm />
       default:
         return <div>TODO component</div>
     }
@@ -44,7 +47,7 @@ export default function Home() {
           {
             steps.map((step) => (
               <StepContainer key={step.title} title={step.title} description={step.description}> 
-                { getCurrentStepComponent(step.title) }
+                { getCurrentStepComponent(step.num) }
               </ StepContainer>
             ))
           }
