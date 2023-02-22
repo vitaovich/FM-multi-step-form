@@ -1,8 +1,8 @@
 import useInput from "@/hooks/use-input";
 import React, { ChangeEvent, FocusEvent, ChangeEventHandler, FocusEventHandler, useRef, useState } from "react";
+import StepFormInput from "./stepFormInput";
 
 const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHandler: (name: string) => void }> = (props) => {
-    // const nameTextInputRef = useRef<HTMLInputElement>(null);
     const {
         value: enteredName,
         isValid: enteredNameIsValid,
@@ -30,7 +30,6 @@ const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHa
         resetNameInput()
     }
 
-
     const nameInputClasses = nameInputHasError
         ? 'border-StrawberryRed' : 'border-LightGray';
 
@@ -40,7 +39,7 @@ const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHa
             <p className='text-CoolGray text-lg'>{props.description}</p>
 
             <form onSubmit={submitHandler}>
-                <div className='flex flex-col space-y-2'>
+                {/* <div className='flex flex-col space-y-2'>
                     <div className="flex flex-row justify-between">
                         <label htmlFor='name' className=''>Name</label>
                         {nameInputHasError && <p className="text-StrawberryRed">This field is required</p>}
@@ -48,14 +47,22 @@ const StepForm: React.FC<{ title: string, description: string, addPersonalInfoHa
                     <input
                         id='name'
                         type="text"
-                        // ref={nameTextInputRef}
                         onChange={nameChangedHandler}
                         onBlur={nameBlurHandler}
                         value={enteredName}
                         placeholder="e.g. Stephen King"
                         className={`border  rounded-md px-4 py-2 placeholder:font-bold ${nameInputClasses}`}
                     />
-                </div>
+                </div> */}
+                <StepFormInput 
+                    label={"Name"}
+                    validationMessage={"This field is required."}
+                    value={enteredName}
+                    hasError={nameInputHasError}
+                    changeHandler={nameChangedHandler}
+                    blurHandler={nameBlurHandler}
+                    id={"name"} 
+                    placeHolder={"e.g. Stephen King"} />
                 <button>submit</button>
             </form>
         </>
