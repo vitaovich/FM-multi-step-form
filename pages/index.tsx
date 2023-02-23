@@ -2,6 +2,7 @@ import StepContainer from '@/components/stepContainer'
 import StepOneForm from '@/components/stepOneForm'
 import StepTwoForm from '@/components/stepTwoForm'
 import StepThreeForm from '@/components/stepThreeForm'
+import StepFourForm from '@/components/stepFourForm'
 import PersonalInfo from '@/models/PersonalInfo'
 import Head from 'next/head'
 import React, { useState } from 'react'
@@ -12,8 +13,8 @@ export default function Home() {
   const [steps, setSteps] = useState<{num: number, title: string, description: string}[]> ([
     // {num: 1, title: 'Personal info', description: 'Please provide your name, email address, and phone number.'},
     // {num: 2, title: 'Select your plan', description: 'You have the option of monthly or yearly billing.'},
-    {num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
-    // {num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
+    // {num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
+    {num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
   ])
 
   const [personalInfo, setPersonalInf] = useState<PersonalInfo>(new PersonalInfo())
@@ -34,6 +35,8 @@ export default function Home() {
         return <StepTwoForm />
       case 3 : 
         return <StepThreeForm />
+      case 4 : 
+        return <StepFourForm />
       default:
         return <div>TODO component</div>
     }
