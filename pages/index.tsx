@@ -1,6 +1,7 @@
 import StepContainer from '@/components/stepContainer'
 import StepOneForm from '@/components/stepOneForm'
 import StepTwoForm from '@/components/stepTwoForm'
+import StepThreeForm from '@/components/stepThreeForm'
 import PersonalInfo from '@/models/PersonalInfo'
 import Head from 'next/head'
 import React, { useState } from 'react'
@@ -10,8 +11,8 @@ import Sidebar from '../components/sideBar'
 export default function Home() {
   const [steps, setSteps] = useState<{num: number, title: string, description: string}[]> ([
     // {num: 1, title: 'Personal info', description: 'Please provide your name, email address, and phone number.'},
-    {num: 2, title: 'Select your plan', description: 'You have the option of monthly or yearly billing.'},
-    // {num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
+    // {num: 2, title: 'Select your plan', description: 'You have the option of monthly or yearly billing.'},
+    {num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
     // {num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
   ])
 
@@ -31,6 +32,8 @@ export default function Home() {
         return <StepOneForm addPersonalInfoHandler={addPersonalInfoHandler} />
       case 2 : 
         return <StepTwoForm />
+      case 3 : 
+        return <StepThreeForm />
       default:
         return <div>TODO component</div>
     }
@@ -41,7 +44,7 @@ export default function Home() {
       <Head>
         <title>Multi Step Form</title>
       </Head>
-      <div className='flex items-center justify-center h-screen bg-Magnolia font-ubuntu'>
+      <div className='flex items-center justify-center min-h-screen bg-Magnolia font-ubuntu'>
         <div className='bg-white rounded-md text-MarineBlue mx-4 p-6'>
           {/* <Sidebar></Sidebar> */}
           {
