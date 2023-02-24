@@ -29,6 +29,14 @@ export default function Home() {
     })
   }
 
+  const isYearlyHandler = (isYearly: boolean) => {
+    console.log('changing yearly')
+    setOrderInfo((prev: Order) => {
+      prev.isYearly = isYearly
+      return prev
+    })
+  }
+
   const getCurrentStepComponent = (step: number) => {
     switch (step) {
       case 1:
@@ -39,7 +47,10 @@ export default function Home() {
           addPersonalInfoHandler={addPersonalInfoHandler}
         />
       case 2:
-        return <StepTwoForm />
+        return <StepTwoForm
+          yearly={orderInfo.isYearly}
+          yearlyHandler={isYearlyHandler}
+        />
       case 3:
         return <StepThreeForm />
       case 4:
