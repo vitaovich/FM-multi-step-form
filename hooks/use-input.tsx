@@ -1,7 +1,7 @@
 import { ChangeEvent, FocusEvent, useState } from "react";
 
-const useInput = (validateValue: (value:string) => boolean) => {
-    const [enteredValue, setEnteredValue] = useState<string>('');
+const useInput = (input: string, validateValue: (value:string) => boolean) => {
+    const [enteredValue, setEnteredValue] = useState<string>(input);
     const [isTouched, setIsTouched] = useState<boolean>(false);
 
     const valueIsValid = validateValue(enteredValue);

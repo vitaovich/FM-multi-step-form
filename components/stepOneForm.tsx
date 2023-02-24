@@ -2,7 +2,7 @@ import useInput from "@/hooks/use-input";
 import React, { ChangeEvent, FocusEvent, ChangeEventHandler, FocusEventHandler, useRef, useState } from "react";
 import StepFormInput from "./stepFormInput";
 
-const StepOneForm: React.FC<{ addPersonalInfoHandler: (name: string, email: string, phone: string) => void }> = (props) => {
+const StepOneForm: React.FC<{ name: string, email: string, phoneNum: string, addPersonalInfoHandler: (name: string, email: string, phone: string) => void }> = (props) => {
     const {
         value: enteredName,
         isValid: enteredNameIsValid,
@@ -11,7 +11,7 @@ const StepOneForm: React.FC<{ addPersonalInfoHandler: (name: string, email: stri
         inputBlurHandler: nameBlurHandler,
         reset: resetNameInput
     }
-        = useInput(value => value.trim() !== '');
+        = useInput(props.name, value => value.trim() !== '');
     const {
         value: enteredEmail,
         isValid: enteredEmailIsValid,
@@ -20,7 +20,7 @@ const StepOneForm: React.FC<{ addPersonalInfoHandler: (name: string, email: stri
         inputBlurHandler: emailBlurHandler,
         reset: resetEmailInput
     }
-        = useInput(value => value.trim() !== '');
+        = useInput(props.email, value => value.trim() !== '');
     const {
         value: enteredPhoneNum,
         isValid: enteredPhoneNumIsValid,
@@ -29,7 +29,7 @@ const StepOneForm: React.FC<{ addPersonalInfoHandler: (name: string, email: stri
         inputBlurHandler: phoneNumBlurHandler,
         reset: resetPhoneNumInput
     }
-        = useInput(value => value.trim() !== '');
+        = useInput(props.phoneNum, value => value.trim() !== '');
 
     let formIsValid = false
 
@@ -45,9 +45,9 @@ const StepOneForm: React.FC<{ addPersonalInfoHandler: (name: string, email: stri
         }
         props.addPersonalInfoHandler(enteredName, enteredEmail, enteredPhoneNum)
 
-        // resetNameInput()
-        // resetEmailInput()
-        // resetPhoneNumInput()
+        resetNameInput()
+        resetEmailInput()
+        resetPhoneNumInput()
     }
     return (
         <form onSubmit={submitHandler} className='space-y-4'>

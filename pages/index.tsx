@@ -7,35 +7,42 @@ import PersonalInfo from '@/models/PersonalInfo'
 import Head from 'next/head'
 import React, { useState } from 'react'
 import Sidebar from '../components/sideBar'
+import Order from '@/models/Order'
 
 
 export default function Home() {
-  const [steps, setSteps] = useState<{num: number, title: string, description: string}[]> ([
-    // {num: 1, title: 'Personal info', description: 'Please provide your name, email address, and phone number.'},
-    // {num: 2, title: 'Select your plan', description: 'You have the option of monthly or yearly billing.'},
-    // {num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.'},
-    {num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.'},
+  const [steps, setSteps] = useState<{ num: number, title: string, description: string }[]>([
+    { num: 1, title: 'Personal info', description: 'Please provide your name, email address, and phone number.' },
+    { num: 2, title: 'Select your plan', description: 'You have the option of monthly or yearly billing.' },
+    { num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.' },
+    { num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.' },
   ])
 
-  const [personalInfo, setPersonalInf] = useState<PersonalInfo>(new PersonalInfo())
+  const [orderInfo, setOrderInfo] = useState<Order>(new Order())
 
   const addPersonalInfoHandler = (name: string, email: string, phone: string) => {
     const newPersonalInfo = new PersonalInfo(name, email, phone)
     console.log(newPersonalInfo)
-    setPersonalInf((prevPersonalInfo: PersonalInfo) => {
-      return prevPersonalInfo = newPersonalInfo
+    setOrderInfo((prev: Order) => {
+      prev.personalInfo = newPersonalInfo
+      return prev
     })
   }
 
   const getCurrentStepComponent = (step: number) => {
-    switch(step) {
-      case 1 : 
-        return <StepOneForm addPersonalInfoHandler={addPersonalInfoHandler} />
-      case 2 : 
+    switch (step) {
+      case 1:
+        return <StepOneForm
+          name={orderInfo.personalInfo.name}
+          email={orderInfo.personalInfo.email}
+          phoneNum={orderInfo.personalInfo.phoneNumber}
+          addPersonalInfoHandler={addPersonalInfoHandler}
+        />
+      case 2:
         return <StepTwoForm />
-      case 3 : 
+      case 3:
         return <StepThreeForm />
-      case 4 : 
+      case 4:
         return <StepFourForm />
       default:
         return <div>TODO component</div>
@@ -52,12 +59,12 @@ export default function Home() {
           {/* <Sidebar></Sidebar> */}
           {
             steps.map((step) => (
-              <StepContainer key={step.title} title={step.title} description={step.description}> 
-                { getCurrentStepComponent(step.num) }
+              <StepContainer key={step.title} title={step.title} description={step.description}>
+                {getCurrentStepComponent(step.num)}
               </ StepContainer>
             ))
           }
-          
+
         </div>
 
       </div>
