@@ -19,6 +19,7 @@ export default function Home() {
   ])
 
   const [orderInfo, setOrderInfo] = useState<Order>(new Order())
+  const [curStep, setCurStep] = useState<number>(1)
 
   const addPersonalInfoHandler = (name: string, email: string, phone: string) => {
     const newPersonalInfo = new PersonalInfo(name, email, phone)
@@ -30,34 +31,52 @@ export default function Home() {
   }
 
   const isYearlyHandler = (isYearly: boolean) => {
-    console.log('changing yearly')
+    console.log(`changing yearly to ${isYearly}`)
     setOrderInfo((prev: Order) => {
       prev.isYearly = isYearly
       return prev
     })
   }
 
+  const curPrevStepHandler = () => {
+    setCurStep((prev: number) => (
+      prev - 1
+    ))
+  }
+
+  const curNextStepHandler = () => {
+    setCurStep((prev: number) => (
+      prev + 1
+    ))
+  }
+
   const getCurrentStepComponent = (step: number) => {
     switch (step) {
-      case 1:
+      case 0:
         return <StepOneForm
           name={orderInfo.personalInfo.name}
           email={orderInfo.personalInfo.email}
           phoneNum={orderInfo.personalInfo.phoneNumber}
           addPersonalInfoHandler={addPersonalInfoHandler}
         />
-      case 2:
+      case 1:
         return <StepTwoForm
           yearly={orderInfo.isYearly}
           yearlyHandler={isYearlyHandler}
         />
+      case 2:
+        return <StepThreeForm yearly={orderInfo.isYearly} />
       case 3:
-        return <StepThreeForm />
-      case 4:
         return <StepFourForm />
       default:
         return <div>TODO component</div>
     }
+  }
+
+  const curStepComponent = (step: number) => {
+    return <StepContainer title={steps[step].title} description={steps[step].description}>
+      {getCurrentStepComponent(step)}
+    </ StepContainer>
   }
 
   return (
@@ -69,15 +88,20 @@ export default function Home() {
         <div className='bg-white rounded-md text-MarineBlue mx-4 p-6'>
           {/* <Sidebar></Sidebar> */}
           {
-            steps.map((step) => (
-              <StepContainer key={step.title} title={step.title} description={step.description}>
-                {getCurrentStepComponent(step.num)}
-              </ StepContainer>
-            ))
           }
+          {curStepComponent(curStep)}
+          <div className={`flex flex-row ${ curStep > 0 ? 'justify-between' : 'justify-end'}`}>
+            {curStep > 0 && 
+            <button className="px-5 py-3 rounded-md" onClick={curPrevStepHandler}>
+              Go Back
+            </button>}
+            {curStep < 4 && 
+            <button className="px-5 py-3 rounded-md text-white bg-MarineBlue" onClick={curNextStepHandler}>
+              Next Step
+            </button>}
+          </div>
 
         </div>
-
       </div>
 
       {/* <!-- Step 1 start -->
