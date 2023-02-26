@@ -8,6 +8,8 @@ import Head from 'next/head'
 import React, { useState } from 'react'
 import Sidebar from '../components/sideBar'
 import Order from '@/models/Order'
+import Addon from '@/models/Addon'
+import Plan from '@/models/Plan'
 
 
 export default function Home() {
@@ -17,24 +19,35 @@ export default function Home() {
     { num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.' },
     { num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.' },
   ])
+  const [curStep, setCurStep] = useState<number>(0)
 
-  const [orderInfo, setOrderInfo] = useState<Order>(new Order())
-  const [curStep, setCurStep] = useState<number>(1)
+  // const [orderInfo, setOrderInfo] = useState<Order>(new Order())
+  const [personalInfo, setPersonalInfo] = useState<PersonalInfo>(new PersonalInfo())
+  const [plan, setPlan] = useState<Plan>()
+  const [addons, setAddons] = useState<Addon[]>()
+  const [isYearly, setIsYearly] = useState<boolean>(false)
+
+
 
   const addPersonalInfoHandler = (name: string, email: string, phone: string) => {
     const newPersonalInfo = new PersonalInfo(name, email, phone)
     console.log(newPersonalInfo)
-    setOrderInfo((prev: Order) => {
-      prev.personalInfo = newPersonalInfo
-      return prev
-    })
+    // setOrderInfo((prev: Order) => {
+    //   const newOrder = { ...prev }
+    //   newOrder.personalInfo
+    //   return newOrder
+    // })
+    setPersonalInfo(newPersonalInfo)
   }
 
   const isYearlyHandler = (isYearly: boolean) => {
     console.log(`changing yearly to ${isYearly}`)
-    setOrderInfo((prev: Order) => {
-      prev.isYearly = isYearly
-      return prev
+    // setOrderInfo((prev: Order) => {
+    //   prev.isYearly = isYearly
+    //   return prev
+    // })
+    setIsYearly((prev: boolean) => {
+      return !prev
     })
   }
 
@@ -54,18 +67,18 @@ export default function Home() {
     switch (step) {
       case 0:
         return <StepOneForm
-          name={orderInfo.personalInfo.name}
-          email={orderInfo.personalInfo.email}
-          phoneNum={orderInfo.personalInfo.phoneNumber}
+          name={personalInfo.name}
+          email={personalInfo.email}
+          phoneNum={personalInfo.phoneNumber}
           addPersonalInfoHandler={addPersonalInfoHandler}
         />
       case 1:
         return <StepTwoForm
-          yearly={orderInfo.isYearly}
+          yearly={isYearly}
           yearlyHandler={isYearlyHandler}
         />
       case 2:
-        return <StepThreeForm yearly={orderInfo.isYearly} />
+        return <StepThreeForm yearly={isYearly} />
       case 3:
         return <StepFourForm />
       default:
@@ -87,18 +100,16 @@ export default function Home() {
       <div className='flex items-center justify-center min-h-screen bg-Magnolia font-ubuntu'>
         <div className='bg-white rounded-md text-MarineBlue mx-4 p-6'>
           {/* <Sidebar></Sidebar> */}
-          {
-          }
           {curStepComponent(curStep)}
-          <div className={`flex flex-row ${ curStep > 0 ? 'justify-between' : 'justify-end'}`}>
-            {curStep > 0 && 
-            <button className="px-5 py-3 rounded-md" onClick={curPrevStepHandler}>
-              Go Back
-            </button>}
-            {curStep < 4 && 
-            <button className="px-5 py-3 rounded-md text-white bg-MarineBlue" onClick={curNextStepHandler}>
-              Next Step
-            </button>}
+          <div className={`flex flex-row mt-24 ${curStep > 0 ? 'justify-between' : 'justify-end'}`}>
+            {curStep > 0 &&
+              <button className="px-5 py-3 rounded-md" onClick={curPrevStepHandler}>
+                Go Back
+              </button>}
+            {curStep < 4 &&
+              <button className="px-5 py-3 rounded-md text-white bg-MarineBlue" onClick={curNextStepHandler}>
+                Next Step
+              </button>}
           </div>
 
         </div>

@@ -45,9 +45,9 @@ const StepOneForm: React.FC<{ name: string, email: string, phoneNum: string, add
         }
         props.addPersonalInfoHandler(enteredName, enteredEmail, enteredPhoneNum)
 
-        resetNameInput()
-        resetEmailInput()
-        resetPhoneNumInput()
+        // resetNameInput()
+        // resetEmailInput()
+        // resetPhoneNumInput()
     }
     return (
         <form onSubmit={submitHandler} className='space-y-4'>
