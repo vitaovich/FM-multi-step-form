@@ -44,7 +44,7 @@ export default function Home() {
 
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo>(new PersonalInfo())
   const [plan, setPlan] = useState<Plan>()
-  const [addons, setAddons] = useState<Addon[]>()
+  const [addons, setAddons] = useState<Addon[]>([])
   const [isYearly, setIsYearly] = useState<boolean>(false)
 
   const addPersonalInfoHandler = (name: string, email: string, phone: string) => {
@@ -54,6 +54,12 @@ export default function Home() {
 
   const addPlanHandler = (plan: Plan) => {
     setPlan(plan)
+  }
+
+  const addAddonHandler = (addon: Addon) => {
+    setAddons((prev)=> {
+      return [addon, ...prev]
+    })
   }
 
   const isYearlyHandler = (isYearly: boolean) => {
@@ -92,7 +98,7 @@ export default function Home() {
               />
             }
             {curStep == 2 &&
-              <StepThreeForm yearly={isYearly} />
+              <StepThreeForm addonHandler={addAddonHandler} yearly={isYearly} />
             }
             {curStep == 3 &&
               <StepFourForm />

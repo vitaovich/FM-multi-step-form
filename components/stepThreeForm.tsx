@@ -2,7 +2,7 @@
 import Addon from "@/models/Addon"
 import { useState } from "react"
 
-const StepThreeForm: React.FC<{yearly: boolean}> = (props) => {
+const StepThreeForm: React.FC<{addonHandler: (addon: Addon) => void, yearly: boolean}> = (props) => {
     const [addons, setAddons] = useState<Addon[]>(
         [
             new Addon('Online service', 'Access to multiplayer games', 1),
@@ -16,12 +16,15 @@ const StepThreeForm: React.FC<{yearly: boolean}> = (props) => {
     )
     )
 
+    const onClickAddonHandler = (addon: Addon) => {
+        props.addonHandler(addon)
+    }
+
     return (
         <div className="flex flex-col space-y-4">
-            {'props.yearly: ' + props.yearly}
             {
                 formattedAddons.map((addon) => (
-                    <div key={addon.addon.name} className="flex flex-row items-center border rounded-md space-x-4 p-4">
+                    <div key={addon.addon.name} className="flex flex-row items-center border rounded-md space-x-4 p-4" onClick={() => onClickAddonHandler(addon)}>
                         <input
                             type="checkbox"
                             name="check"
