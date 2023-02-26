@@ -18,7 +18,7 @@ export default function Home() {
     { num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.' },
     { num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.' },
   ])
-  const [curStep, setCurStep] = useState<number>(0)
+  const [curStep, setCurStep] = useState<number>(1)
   const [curFormValid, setFormValid] = useState<boolean>(false)
   const formSubmitButton = useRef<HTMLButtonElement>(null)
 
@@ -78,6 +78,9 @@ export default function Home() {
       <div className='flex items-center justify-center min-h-screen bg-Magnolia font-ubuntu'>
         <div className='bg-white rounded-md text-MarineBlue mx-4 p-6'>
           {/* <Sidebar></Sidebar> */}
+          {
+            JSON.stringify({personalInfo, plan, addons, isYearly })
+          }
           <StepContainer title={steps[curStep].title} description={steps[curStep].description}>
             {curStep == 0 &&
               <StepOneForm
@@ -91,9 +94,12 @@ export default function Home() {
             }
             {curStep == 1 &&
               <StepTwoForm
+                selectedPlan={plan}
                 addPlanHandler={addPlanHandler}
                 yearly={isYearly}
                 yearlyHandler={isYearlyHandler}
+                formValidHandler={curFormValidHandler}
+                buttonRef={formSubmitButton}
               />
             }
             {curStep == 2 &&
