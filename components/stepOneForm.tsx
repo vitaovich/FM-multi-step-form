@@ -1,7 +1,17 @@
 import useInput from "@/hooks/use-input";
+import { RefObject } from "react";
 import StepFormInput from "./stepFormInput";
 
-const StepOneForm: React.FC<{ name: string, email: string, phoneNum: string, addPersonalInfoHandler: (name: string, email: string, phone: string) => void }> = (props) => {
+type Type = { 
+    name: string, 
+    email: string, 
+    phoneNum: string, 
+    addPersonalInfoHandler: (name: string, email: string, phone: string) => void 
+    formValidHandler: (isValid: boolean) => void
+    buttonRef: RefObject<HTMLButtonElement>
+}
+
+const StepOneForm: React.FC<Type> = (props) => {
     const {
         value: enteredName,
         isValid: enteredNameIsValid,
@@ -38,12 +48,12 @@ const StepOneForm: React.FC<{ name: string, email: string, phoneNum: string, add
 
     const submitHandler = (event: React.FormEvent) => {
         event.preventDefault();
-
         if (!formIsValid) {
+            props.formValidHandler(false)
             return
         }
         props.addPersonalInfoHandler(enteredName, enteredEmail, enteredPhoneNum)
-
+        props.formValidHandler(true)
         // resetNameInput()
         // resetEmailInput()
         // resetPhoneNumInput()
@@ -80,7 +90,7 @@ const StepOneForm: React.FC<{ name: string, email: string, phoneNum: string, add
                 id={"phone"}
                 placeHolder={"e.g. +1 234 567 890"}
             />
-            <div className="flex justify-end"><button className="px-5 py-3 rounded-md text-white bg-MarineBlue">Next Step</button></div>
+            <button ref={props.buttonRef} className="hidden">Next Step</button>
         </form>
     )
 }
