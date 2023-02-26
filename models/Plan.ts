@@ -4,7 +4,7 @@ class Plan {
     price: number
     img: any
 
-    constructor(name: string = '', price: number = 0, img: any) {
+    constructor(name: string = '', price: number = 0, img: any = '') {
         this.id = name
         this.name = name
         this.price = price

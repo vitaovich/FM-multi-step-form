@@ -121,11 +121,11 @@ export default function Home() {
             }
             <div className={`absolute inset-x-0 bottom-0 flex flex-row mt-24 p-4 ${curStep > 0 ? 'justify-between' : 'justify-end'} bg-white md:static md:bottom-auto md:inset-x-auto`}>
               {curStep > 0 &&
-                <button className="px-5 py-3 rounded-md" onClick={curPrevStepHandler}>
+                <button className="px-5 py-3 rounded-md text-CoolGray hover:text-MarineBlue hover:font-bold" onClick={curPrevStepHandler}>
                   Go Back
                 </button>}
               {curStep < 4 &&
-                <button className={`px-5 py-3 rounded-md text-white ${curStep === 3 ? 'bg-PurplishBlue' : 'bg-MarineBlue'}`} onClick={submitCurFormHandler}>
+                <button className={`px-5 py-3 rounded-md text-white ${curStep === 3 ? 'bg-PurplishBlue hover:bg-PastelBlue' : 'bg-MarineBlue hover:bg-MarineBlue/90'}`} onClick={submitCurFormHandler}>
                   {curStep === 3 ? 'Confirm' : 'Next Step'}
                 </button>}
             </div>

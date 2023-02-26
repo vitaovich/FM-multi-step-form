@@ -18,7 +18,7 @@ const StepFormInput: React.FC<{ id: string, label: string, placeHolder: string, 
                 onBlur={props.blurHandler}
                 value={props.value}
                 placeholder={props.placeHolder}
-                className={`border rounded-md px-4 py-2 placeholder:font-bold ${inputClasses}`}
+                className={`border rounded-md px-4 py-2 placeholder:font-bold ${inputClasses} hover:border-PurplishBlue`}
             />
         </div>
     )
