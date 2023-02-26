@@ -5,7 +5,7 @@ import sidebarBGMobile from '../public/images/bg-sidebar-mobile.svg'
 import SidebarStep from './sidebarStep'
 import Step from './Step'
 
-const Sidebar = () => {
+const Sidebar: React.FC<{selectedStep: number}> = (props) => {
     const [steps,setSteps] = useState<Step[]>([
         new Step(1, 'Step 1', 'Your Info'),
         new Step(2, 'Step 2', 'Select plan'),
@@ -14,31 +14,15 @@ const Sidebar = () => {
     ])
 
     return (
-        <div id='sidebar' className='m-4 p-6'>
-            <div className='bg-slate-200/50'>
-
-                {/* <!-- Sidebar start --> */}
-                <div className="flex flex-row md:flex-col">
+        <div id='sidebar' className='p-6 absolute top-0 inset-x-0 md:static md:top-auto md:inset-x-auto'>
+            <div className=''>
+                <div className="flex flex-row justify-center md:flex-col">
                     {
                         steps.map((step) => (
-                            <SidebarStep key={step.id} step={step} />
+                            <SidebarStep key={step.id} step={step} selected={step.num === props.selectedStep} />
                         ))
                     }
                 </div>
-
-                {/* Step 1
-            Your info
-
-            Step 2
-            Select plan
-
-            Step 3
-            Add-ons
-
-            Step 4
-            Summary */}
-
-                {/* <!-- Sidebar end --> */}
             </div>
         </div>
     )
