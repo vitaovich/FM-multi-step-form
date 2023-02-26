@@ -3,7 +3,7 @@ import Plan from "@/models/Plan";
 import { useState } from "react"
 import StepTwoFormInput from "./stepTwoFormInput"
 
-const StepTwoForm: React.FC<{ yearly: boolean, yearlyHandler: (yearly: boolean) => void }> = (props) => {
+const StepTwoForm: React.FC<{ addPlanHandler: (plan: Plan) => void,yearly: boolean, yearlyHandler: (yearly: boolean) => void }> = (props) => {
     const [isYearly, setYearly] = useState<boolean>(props.yearly);
     const [plans, setPlans] = useState<Plan[]>(
         [
@@ -19,9 +19,12 @@ const StepTwoForm: React.FC<{ yearly: boolean, yearlyHandler: (yearly: boolean) 
     )
 
     const onClickYearlyHandler = () => {
-        console.log('clicked yearly')
         setYearly((prev) => (!prev))
         props.yearlyHandler(isYearly)
+    }
+
+    const onClickPlanHandler = (plan: Plan) => {
+        props.addPlanHandler(plan)
     }
 
     return (
@@ -30,7 +33,7 @@ const StepTwoForm: React.FC<{ yearly: boolean, yearlyHandler: (yearly: boolean) 
             <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
                 {
                     formattedPlans.map((plan) => (
-                        <StepTwoFormInput key={plan.plan.name} title={plan.plan.name} description={plan.description} isYearly={isYearly} />
+                        <StepTwoFormInput key={plan.plan.name} plan={plan.plan} title={plan.plan.name} description={plan.description} isYearly={isYearly} onClickHandler={onClickPlanHandler} />
                     ))
                 }
             </div>

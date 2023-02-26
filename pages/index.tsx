@@ -31,11 +31,11 @@ export default function Home() {
   const curNextStepHandler = () => {
     // revisit
     formSubmitButton.current?.click()
-    if (curFormValid) {
+    // if (curFormValid) {
       setCurStep((prev: number) => (
         prev + 1
       ))
-    }
+    // }
   }
 
   const curFormValidHandler = (isValid: boolean) => {
@@ -52,6 +52,10 @@ export default function Home() {
     setPersonalInfo(newPersonalInfo)
   }
 
+  const addPlanHandler = (plan: Plan) => {
+    setPlan(plan)
+  }
+
   const isYearlyHandler = (isYearly: boolean) => {
     setIsYearly((prev: boolean) => {
       return !prev
@@ -66,6 +70,9 @@ export default function Home() {
       <div className='flex items-center justify-center min-h-screen bg-Magnolia font-ubuntu'>
         <div className='bg-white rounded-md text-MarineBlue mx-4 p-6'>
           {/* <Sidebar></Sidebar> */}
+          {
+            JSON.stringify({personalInfo, plan, addons, isYearly})
+          }
           <StepContainer title={steps[curStep].title} description={steps[curStep].description}>
             {curStep == 0 &&
               <StepOneForm
@@ -79,6 +86,7 @@ export default function Home() {
             }
             {curStep == 1 &&
               <StepTwoForm
+                addPlanHandler={addPlanHandler}
                 yearly={isYearly}
                 yearlyHandler={isYearlyHandler}
               />
