@@ -18,7 +18,7 @@ export default function Home() {
     { num: 3, title: 'Pick add-ons', description: 'Add-ons help enhance your gaming experience.' },
     { num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.' },
   ])
-  const [curStep, setCurStep] = useState<number>(1)
+  const [curStep, setCurStep] = useState<number>(2)
   const [curFormValid, setFormValid] = useState<boolean>(false)
   const formSubmitButton = useRef<HTMLButtonElement>(null)
 
@@ -58,10 +58,8 @@ export default function Home() {
     setPlan(plan)
   }
 
-  const addAddonHandler = (addon: Addon) => {
-    setAddons((prev)=> {
-      return [addon, ...prev]
-    })
+  const addAddonHandler = (addon: Addon[]) => {
+    setAddons(addon)
   }
 
   const isYearlyHandler = (isYearly: boolean) => {
@@ -79,7 +77,7 @@ export default function Home() {
         <div className='bg-white rounded-md text-MarineBlue mx-4 p-6'>
           {/* <Sidebar></Sidebar> */}
           {
-            JSON.stringify({personalInfo, plan, addons, isYearly })
+            JSON.stringify({ personalInfo, plan, addons, isYearly })
           }
           <StepContainer title={steps[curStep].title} description={steps[curStep].description}>
             {curStep == 0 &&
@@ -103,7 +101,12 @@ export default function Home() {
               />
             }
             {curStep == 2 &&
-              <StepThreeForm addonHandler={addAddonHandler} yearly={isYearly} />
+              <StepThreeForm
+                selectedAddons={addons}
+                addonHandler={addAddonHandler} yearly={isYearly}
+                formValidHandler={curFormValidHandler}
+                buttonRef={formSubmitButton}
+              />
             }
             {curStep == 3 &&
               <StepFourForm plan={plan} addons={addons} isYearly={isYearly} />
