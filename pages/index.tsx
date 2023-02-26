@@ -121,7 +121,7 @@ export default function Home() {
                 <ThankYou></ThankYou>
               }
             </div>
-            <div className={`mt-8 p-4 flex flex-row ${curStep > 0 ? 'justify-between' : 'justify-end'} bg-white`}>
+            <div className={`absolute bottom-0 inset-x-0 mt-8 p-4 flex flex-row ${curStep > 0 ? 'justify-between' : 'justify-end'} bg-white md:relative md:bottom-auto md:inset-x-auto`}>
               {curStep > 0 &&
                 <button className="px-5 py-3 rounded-md text-CoolGray hover:text-MarineBlue hover:font-bold" onClick={curPrevStepHandler}>
                   Go Back
