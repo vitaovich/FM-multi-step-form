@@ -28,18 +28,20 @@ export default function Home() {
     ))
   }
 
-  const curNextStepHandler = () => {
-    // revisit
+  const submitCurFormHandler = () => {
     formSubmitButton.current?.click()
-    // if (curFormValid) {
-      setCurStep((prev: number) => (
-        prev + 1
-      ))
-    // }
+  }
+
+  const curNextStepHandler = () => {
+    setCurStep((prev: number) => (
+      prev + 1
+    ))
   }
 
   const curFormValidHandler = (isValid: boolean) => {
-    setFormValid(isValid)
+    if (isValid) {
+      curNextStepHandler()
+    }
   }
 
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo>(new PersonalInfo())
@@ -107,7 +109,7 @@ export default function Home() {
                 Go Back
               </button>}
             {curStep < 4 &&
-              <button className="px-5 py-3 rounded-md text-white bg-MarineBlue" onClick={curNextStepHandler}>
+              <button className="px-5 py-3 rounded-md text-white bg-MarineBlue" onClick={submitCurFormHandler}>
                 Next Step
               </button>}
           </div>
