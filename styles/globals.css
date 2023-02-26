@@ -5,7 +5,7 @@
 #sidebar {
     background-image: url('../public/images/bg-sidebar-desktop.svg');
     background-repeat: no-repeat;
-    background-size: cover
+    background-size: contain
 }
 
 @media(max-width: 500px) {

@@ -20,7 +20,6 @@ export default function Home() {
     { num: 4, title: 'Finishing up', description: 'Double-check everything looks OK before confirming.' },
   ])
   const [curStep, setCurStep] = useState<number>(0)
-  const [curFormValid, setFormValid] = useState<boolean>(false)
   const formSubmitButton = useRef<HTMLButtonElement>(null)
 
   const curPrevStepHandler = () => {
