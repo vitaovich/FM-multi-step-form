@@ -43,7 +43,7 @@ export default function Home() {
   }
 
   const [personalInfo, setPersonalInfo] = useState<PersonalInfo>(new PersonalInfo())
-  const [plan, setPlan] = useState<Plan>()
+  const [plan, setPlan] = useState<Plan>(new Plan())
   const [addons, setAddons] = useState<Addon[]>([])
   const [isYearly, setIsYearly] = useState<boolean>(false)
 
@@ -76,9 +76,6 @@ export default function Home() {
       <div className='flex items-center justify-center min-h-screen bg-Magnolia font-ubuntu'>
         <div className='bg-white rounded-md text-MarineBlue mx-4 p-6'>
           {/* <Sidebar></Sidebar> */}
-          {
-            JSON.stringify({personalInfo, plan, addons, isYearly})
-          }
           <StepContainer title={steps[curStep].title} description={steps[curStep].description}>
             {curStep == 0 &&
               <StepOneForm
@@ -101,7 +98,7 @@ export default function Home() {
               <StepThreeForm addonHandler={addAddonHandler} yearly={isYearly} />
             }
             {curStep == 3 &&
-              <StepFourForm />
+              <StepFourForm plan={plan} addons={addons} isYearly={isYearly} />
             }
           </ StepContainer>
           <div className={`flex flex-row mt-24 ${curStep > 0 ? 'justify-between' : 'justify-end'}`}>

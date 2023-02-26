@@ -24,7 +24,7 @@ const StepThreeForm: React.FC<{addonHandler: (addon: Addon) => void, yearly: boo
         <div className="flex flex-col space-y-4">
             {
                 formattedAddons.map((addon) => (
-                    <div key={addon.addon.name} className="flex flex-row items-center border rounded-md space-x-4 p-4" onClick={() => onClickAddonHandler(addon)}>
+                    <div key={addon.addon.name} className="flex flex-row items-center border rounded-md space-x-4 p-4" onClick={() => onClickAddonHandler(addon.addon)}>
                         <input
                             type="checkbox"
                             name="check"
