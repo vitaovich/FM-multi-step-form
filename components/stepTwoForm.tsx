@@ -1,4 +1,6 @@
-// import iconArcade from "../public/images/icon-arcade.svg"
+import iconArcade from "../public/images/icon-arcade.svg"
+import iconAdvanced from "../public/images/icon-advanced.svg"
+import iconPro from "../public/images/icon-pro.svg"
 import Plan from "@/models/Plan";
 import { RefObject, useState } from "react"
 import StepTwoFormInput from "./stepTwoFormInput"
@@ -7,9 +9,9 @@ const StepTwoForm: React.FC<{ selectedPlan: Plan, buttonRef: RefObject<HTMLButto
     const [isYearly, setYearly] = useState<boolean>(props.yearly);
     const [plans, setPlans] = useState<Plan[]>(
         [
-            new Plan('Arcade', 9),
-            new Plan('Advanced', 12),
-            new Plan('Pro', 15),
+            new Plan('Arcade', 9, iconArcade),
+            new Plan('Advanced', 12, iconAdvanced),
+            new Plan('Pro', 15, iconPro),
         ]
     )
     const formattedPlans = plans.map((plan) =>
@@ -38,8 +40,8 @@ const StepTwoForm: React.FC<{ selectedPlan: Plan, buttonRef: RefObject<HTMLButto
 
             <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
                 {
-                    formattedPlans.map((plan) => (
-                        <StepTwoFormInput key={plan.plan.name} plan={plan.plan} title={plan.plan.name} description={plan.description} isYearly={isYearly} selected={plan.plan.name === selectedPlan.name} onClickHandler={onClickPlanHandler} />
+                    formattedPlans.map((formattedPlan) => (
+                        <StepTwoFormInput img={formattedPlan.plan.img} key={formattedPlan.plan.name} plan={formattedPlan.plan} title={formattedPlan.plan.name} description={formattedPlan.description} isYearly={isYearly} selected={formattedPlan.plan.name === selectedPlan.name} onClickHandler={onClickPlanHandler} />
                     ))
                 }
             </div>

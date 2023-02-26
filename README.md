@@ -63,6 +63,9 @@ Your users should be able to:
 - TODO
     ```
 
+### Questions
+- best way to handle multiple images such as for selecting your plan?
+
 ### Continued development
 
 I plan to continue diving deeper into React and NextJS for tougher challenges requiring more interactivity.
