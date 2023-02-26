@@ -1,5 +1,4 @@
 import useInput from "@/hooks/use-input";
-import React, { ChangeEvent, FocusEvent, ChangeEventHandler, FocusEventHandler, useRef, useState } from "react";
 import StepFormInput from "./stepFormInput";
 
 const StepOneForm: React.FC<{ name: string, email: string, phoneNum: string, addPersonalInfoHandler: (name: string, email: string, phone: string) => void }> = (props) => {

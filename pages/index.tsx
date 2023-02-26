@@ -21,36 +21,6 @@ export default function Home() {
   ])
   const [curStep, setCurStep] = useState<number>(0)
 
-  // const [orderInfo, setOrderInfo] = useState<Order>(new Order())
-  const [personalInfo, setPersonalInfo] = useState<PersonalInfo>(new PersonalInfo())
-  const [plan, setPlan] = useState<Plan>()
-  const [addons, setAddons] = useState<Addon[]>()
-  const [isYearly, setIsYearly] = useState<boolean>(false)
-
-
-
-  const addPersonalInfoHandler = (name: string, email: string, phone: string) => {
-    const newPersonalInfo = new PersonalInfo(name, email, phone)
-    console.log(newPersonalInfo)
-    // setOrderInfo((prev: Order) => {
-    //   const newOrder = { ...prev }
-    //   newOrder.personalInfo
-    //   return newOrder
-    // })
-    setPersonalInfo(newPersonalInfo)
-  }
-
-  const isYearlyHandler = (isYearly: boolean) => {
-    console.log(`changing yearly to ${isYearly}`)
-    // setOrderInfo((prev: Order) => {
-    //   prev.isYearly = isYearly
-    //   return prev
-    // })
-    setIsYearly((prev: boolean) => {
-      return !prev
-    })
-  }
-
   const curPrevStepHandler = () => {
     setCurStep((prev: number) => (
       prev - 1
@@ -92,6 +62,22 @@ export default function Home() {
     </ StepContainer>
   }
 
+  const [personalInfo, setPersonalInfo] = useState<PersonalInfo>(new PersonalInfo())
+  const [plan, setPlan] = useState<Plan>()
+  const [addons, setAddons] = useState<Addon[]>()
+  const [isYearly, setIsYearly] = useState<boolean>(false)
+
+  const addPersonalInfoHandler = (name: string, email: string, phone: string) => {
+    const newPersonalInfo = new PersonalInfo(name, email, phone)
+    setPersonalInfo(newPersonalInfo)
+  }
+
+  const isYearlyHandler = (isYearly: boolean) => {
+    setIsYearly((prev: boolean) => {
+      return !prev
+    })
+  }
+
   return (
     <>
       <Head>
@@ -111,7 +97,6 @@ export default function Home() {
                 Next Step
               </button>}
           </div>
-
         </div>
       </div>
 
