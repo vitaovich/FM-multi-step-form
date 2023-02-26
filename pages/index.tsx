@@ -77,49 +77,51 @@ export default function Home() {
       <Head>
         <title>Multi Step Form</title>
       </Head>
-      <div className='flex items-center justify-center min-h-screen bg-Magnolia font-ubuntu'>
-        <div className='bg-white rounded-lg text-MarineBlue mx-4 p-6 md:flex md:flex-row'>
+      <div className='flex justify-center min-h-screen bg-Magnolia font-ubuntu md:items-center'>
+        <div className='rounded-lg text-MarineBlue md:flex md:flex-row md:bg-white md:p-4'>
           <Sidebar selectedStep={curStep + 1}></Sidebar>
-          <div className="flex flex-col md:mx-24 md:my-4">
-            {curStep < 4 &&
-              <StepContainer title={steps[curStep].title} description={steps[curStep].description}>
-                {curStep == 0 &&
-                  <StepOneForm
-                    name={personalInfo.name}
-                    email={personalInfo.email}
-                    phoneNum={personalInfo.phoneNumber}
-                    addPersonalInfoHandler={addPersonalInfoHandler}
-                    formValidHandler={curFormValidHandler}
-                    buttonRef={formSubmitButton}
-                  />
-                }
-                {curStep == 1 &&
-                  <StepTwoForm
-                    selectedPlan={plan}
-                    addPlanHandler={addPlanHandler}
-                    yearly={isYearly}
-                    yearlyHandler={isYearlyHandler}
-                    formValidHandler={curFormValidHandler}
-                    buttonRef={formSubmitButton}
-                  />
-                }
-                {curStep == 2 &&
-                  <StepThreeForm
-                    selectedAddons={addons}
-                    addonHandler={addAddonHandler} yearly={isYearly}
-                    formValidHandler={curFormValidHandler}
-                    buttonRef={formSubmitButton}
-                  />
-                }
-                {curStep == 3 &&
-                  <StepFourForm plan={plan} addons={addons} isYearly={isYearly} />
-                }
-              </ StepContainer>
-            }
-            {curStep == 4 &&
-              <ThankYou></ThankYou>
-            }
-            <div className={`absolute inset-x-0 bottom-0 flex flex-row mt-24 p-4 ${curStep > 0 ? 'justify-between' : 'justify-end'} bg-white md:static md:bottom-auto md:inset-x-auto`}>
+          <div className="flex flex-col">
+            <div className="relative mt-28 bg-white rounded-lg p-4 mx-6 md:mt-0 md:mx-0">
+              {curStep < 4 &&
+                <StepContainer title={steps[curStep].title} description={steps[curStep].description}>
+                  {curStep == 0 &&
+                    <StepOneForm
+                      name={personalInfo.name}
+                      email={personalInfo.email}
+                      phoneNum={personalInfo.phoneNumber}
+                      addPersonalInfoHandler={addPersonalInfoHandler}
+                      formValidHandler={curFormValidHandler}
+                      buttonRef={formSubmitButton}
+                    />
+                  }
+                  {curStep == 1 &&
+                    <StepTwoForm
+                      selectedPlan={plan}
+                      addPlanHandler={addPlanHandler}
+                      yearly={isYearly}
+                      yearlyHandler={isYearlyHandler}
+                      formValidHandler={curFormValidHandler}
+                      buttonRef={formSubmitButton}
+                    />
+                  }
+                  {curStep == 2 &&
+                    <StepThreeForm
+                      selectedAddons={addons}
+                      addonHandler={addAddonHandler} yearly={isYearly}
+                      formValidHandler={curFormValidHandler}
+                      buttonRef={formSubmitButton}
+                    />
+                  }
+                  {curStep == 3 &&
+                    <StepFourForm plan={plan} addons={addons} isYearly={isYearly} />
+                  }
+                </ StepContainer>
+              }
+              {curStep == 4 &&
+                <ThankYou></ThankYou>
+              }
+            </div>
+            <div className={`mt-8 p-4 flex flex-row ${curStep > 0 ? 'justify-between' : 'justify-end'} bg-white`}>
               {curStep > 0 &&
                 <button className="px-5 py-3 rounded-md text-CoolGray hover:text-MarineBlue hover:font-bold" onClick={curPrevStepHandler}>
                   Go Back
