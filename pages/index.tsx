@@ -119,18 +119,18 @@ export default function Home() {
             <StepContainer title={stepForms[curStep].title} description={stepForms[curStep].description}>
               {stepForms[curStep].form}
             </ StepContainer>
-            <div className={`absolute bottom-0 inset-x-0 mt-8 p-4 flex flex-row ${curStep > 0 ? 'justify-between' : 'justify-end'} bg-white md:relative md:bottom-auto md:inset-x-auto`}>
-              {curStep > 0 &&
-                <button className="px-5 py-3 rounded-md text-CoolGray hover:text-MarineBlue hover:font-bold" onClick={() => curStepHandler(-1)}>
-                  Go Back
-                </button>
-              }
-              {curStep < 4 &&
+            {curStep < 4 &&
+              <div className={`absolute bottom-0 inset-x-0 mt-8 p-4 flex flex-row ${curStep > 0 ? 'justify-between' : 'justify-end'} bg-white md:relative md:bottom-auto md:inset-x-auto`}>
+                {curStep > 0 &&
+                  <button className="px-5 py-3 rounded-md text-CoolGray hover:text-MarineBlue hover:font-bold" onClick={() => curStepHandler(-1)}>
+                    Go Back
+                  </button>
+                }
                 <button className={`px-5 py-3 rounded-md text-white ${curStep === 3 ? 'bg-PurplishBlue hover:bg-PastelBlue' : 'bg-MarineBlue hover:bg-MarineBlue/90'}`} onClick={submitCurFormHandler}>
                   {curStep === 3 ? 'Confirm' : 'Next Step'}
                 </button>
-              }
-            </div>
+              </div>
+            }
           </div>
         </div>
       </div>

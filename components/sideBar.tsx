@@ -12,7 +12,7 @@ const Sidebar: React.FC<{selectedStep: number}> = (props) => {
     ])
 
     return (
-        <div id='sidebar' className='absolute top-0 inset-x-0 p-6 md:relative md:top-auto md:inset-x-auto md:w-64'>
+        <div id='sidebar' className='absolute top-0 inset-x-0 p-6 md:relative md:top-auto md:inset-x-auto md:w-80'>
             <div className=''>
                 <div className="flex flex-row justify-center md:flex-col">
                     {

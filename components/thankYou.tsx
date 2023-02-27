@@ -8,7 +8,7 @@ const ThankYou = () => {
                 alt="Thank you"
                 src={thankYou}
             />
-            <h1 className="text-4xl font-bold">Thank you!</h1>
+            <h1>Thank you!</h1>
 
             <p className='text-center text-CoolGray'>
                 Thanks for confirming your subscription! We hope you have fun
