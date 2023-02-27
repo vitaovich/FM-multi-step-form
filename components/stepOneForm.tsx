@@ -29,7 +29,7 @@ const StepOneForm: React.FC<Type> = (props) => {
         inputBlurHandler: emailBlurHandler,
         reset: resetEmailInput
     }
-        = useInput(props.email, value => value.trim() !== '');
+        = useInput(props.email, value => value.includes('@'));
     const {
         value: enteredPhoneNum,
         isValid: enteredPhoneNumIsValid,
@@ -90,7 +90,7 @@ const StepOneForm: React.FC<Type> = (props) => {
                 id={"phone"}
                 placeHolder={"e.g. +1 234 567 890"}
             />
-            <button ref={props.buttonRef} className="hidden">Next Step</button>
+            <button ref={props.buttonRef} className="hidden"></button>
         </form>
     )
 }

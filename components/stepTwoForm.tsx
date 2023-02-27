@@ -64,7 +64,7 @@ const StepTwoForm: React.FC<{ selectedPlan: Plan, buttonRef: RefObject<HTMLButto
                 </button>
                 <p className={isYearly ? 'text-MarineBlue' : 'text-CoolGray'}>Yearly</p>
             </div>
-            <button ref={props.buttonRef} onClick={onSubmit} className="hidden">Next Step</button>
+            <button ref={props.buttonRef} onClick={onSubmit} className="hidden"></button>
         </div>
     )
 }
