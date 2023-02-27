@@ -116,11 +116,9 @@ export default function Home() {
         <div className='rounded-lg text-MarineBlue md:flex md:flex-row md:bg-white md:p-4'>
           <Sidebar selectedStep={curStep + 1}></Sidebar>
           <div className="flex flex-col">
-            <div className="relative mt-28 bg-white rounded-lg p-4 mx-6 md:mt-0 md:mx-0">
-              <StepContainer title={stepForms[curStep].title} description={stepForms[curStep].description}>
-                {stepForms[curStep].form}
-              </ StepContainer>
-            </div>
+            <StepContainer title={stepForms[curStep].title} description={stepForms[curStep].description}>
+              {stepForms[curStep].form}
+            </ StepContainer>
             <div className={`absolute bottom-0 inset-x-0 mt-8 p-4 flex flex-row ${curStep > 0 ? 'justify-between' : 'justify-end'} bg-white md:relative md:bottom-auto md:inset-x-auto`}>
               {curStep > 0 &&
                 <button className="px-5 py-3 rounded-md text-CoolGray hover:text-MarineBlue hover:font-bold" onClick={() => curStepHandler(-1)}>
