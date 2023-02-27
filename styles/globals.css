@@ -8,7 +8,7 @@
     background-size: contain
 }
 
-@media(max-width: 500px) {
+@media(max-width: 768px) {
     #sidebar {
         background-image: url('../public/images/bg-sidebar-mobile.svg');
         background-repeat: no-repeat;

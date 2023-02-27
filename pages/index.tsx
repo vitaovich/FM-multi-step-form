@@ -113,9 +113,9 @@ export default function Home() {
         <title>Multi Step Form</title>
       </Head>
       <div className='flex justify-center min-h-screen bg-Magnolia font-ubuntu md:items-center'>
-        <div className='container rounded-lg text-MarineBlue md:flex md:flex-row md:bg-white md:p-4'>
+        <div className='container rounded-lg text-MarineBlue md:flex md:flex-row md:bg-white md:p-4 md:max-w-4xl'>
           <Sidebar selectedStep={curStep + 1}></Sidebar>
-          <div className="flex flex-col grow md:mx-12">
+          <div className="flex flex-col grow md:mx-8">
             <StepContainer title={stepForms[curStep].title} description={stepForms[curStep].description}>
               {stepForms[curStep].form}
             </ StepContainer>
