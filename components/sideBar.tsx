@@ -1,7 +1,5 @@
-import Image from 'next/image'
 import { useState } from 'react'
 
-import sidebarBGMobile from '../public/images/bg-sidebar-mobile.svg'
 import SidebarStep from './sidebarStep'
 import Step from './Step'
 
