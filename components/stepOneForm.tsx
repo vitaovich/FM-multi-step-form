@@ -1,6 +1,6 @@
 import useInput from "@/hooks/use-input";
 import { RefObject } from "react";
-import StepFormInput from "./stepFormInput";
+import StepOneInput from "./stepOneInput";
 
 type Type = { 
     name: string, 
@@ -60,7 +60,7 @@ const StepOneForm: React.FC<Type> = (props) => {
     }
     return (
         <form onSubmit={submitHandler} className='space-y-4'>
-            <StepFormInput
+            <StepOneInput
                 label={"Name"}
                 validationMessage={"This field is required."}
                 value={enteredName}
@@ -70,7 +70,7 @@ const StepOneForm: React.FC<Type> = (props) => {
                 id={"name"}
                 placeHolder={"e.g. Stephen King"}
             />
-            <StepFormInput
+            <StepOneInput
                 label={"Email Address"}
                 validationMessage={"This field is required."}
                 value={enteredEmail}
@@ -80,7 +80,7 @@ const StepOneForm: React.FC<Type> = (props) => {
                 id={"email"}
                 placeHolder={"e.g. stephenking@lorem.com"}
             />
-            <StepFormInput
+            <StepOneInput
                 label={"Phone Number"}
                 validationMessage={"This field is required."}
                 value={enteredPhoneNum}

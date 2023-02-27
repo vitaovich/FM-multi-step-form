@@ -1,6 +1,6 @@
 import { ChangeEvent, FocusEvent } from "react";
 
-const StepFormInput: React.FC<{ id: string, label: string, placeHolder: string, validationMessage: string, value: string, hasError: boolean, changeHandler: (event: ChangeEvent<HTMLInputElement>) => void, blurHandler: (event: FocusEvent<HTMLInputElement>) => void }> = (props) => {
+const StepOneInput: React.FC<{ id: string, label: string, placeHolder: string, validationMessage: string, value: string, hasError: boolean, changeHandler: (event: ChangeEvent<HTMLInputElement>) => void, blurHandler: (event: FocusEvent<HTMLInputElement>) => void }> = (props) => {
 
     const inputClasses = props.hasError
         ? 'border-StrawberryRed' : 'border-LightGray';
@@ -24,4 +24,4 @@ const StepFormInput: React.FC<{ id: string, label: string, placeHolder: string, 
     )
 }
 
-export default StepFormInput;
+export default StepOneInput;
