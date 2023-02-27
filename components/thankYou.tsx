@@ -10,7 +10,7 @@ const ThankYou = () => {
             />
             <h1 className="text-4xl font-bold">Thank you!</h1>
 
-            <p>
+            <p className='text-center text-CoolGray'>
                 Thanks for confirming your subscription! We hope you have fun
                 using our platform. If you ever need support, please feel free
                 to email us at support@loremgaming.com.

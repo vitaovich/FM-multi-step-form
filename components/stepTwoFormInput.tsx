@@ -10,7 +10,7 @@ const StepTwoFormInput: React.FC<{img: any, plan: Plan, title: string, descripti
                     src={props.img}
                 />
                 <div className="ml-4 md:ml-0">
-                    <h2 className="font-bold md:mt-12">{props.title}</h2>
+                    <h2 className="md:mt-12">{props.title}</h2>
                     <p className="text-CoolGray">{props.description}</p>
                     { props.isYearly && <p>2 months free</p>}
                 </div>

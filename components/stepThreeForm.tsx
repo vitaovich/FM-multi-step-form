@@ -37,15 +37,15 @@ const StepThreeForm: React.FC<{ selectedAddons: Addon[], addonHandler: (addon: A
         <div className="flex flex-col space-y-4">
             {
                 formattedAddons.map((addon) => (
-                    <div key={addon.addon.name} className={`flex flex-row items-center border rounded-md space-x-4 p-4 hover:border-PurplishBlue ${selectedAddons.map((addon) => addon.name).includes(addon.addon.name) ? 'bg-PurplishBlue/5 border-PurplishBlue' : ''}`} onClick={() => onClickAddonHandler(addon.addon)}>
+                    <div key={addon.addon.name} className={`flex flex-row items-center border rounded-lg space-x-4 p-4 hover:border-PurplishBlue ${selectedAddons.map((addon) => addon.name).includes(addon.addon.name) ? 'bg-PurplishBlue/5 border-PurplishBlue' : ''}`} onClick={() => onClickAddonHandler(addon.addon)}>
                         <input
                             type="checkbox"
                             name="check"
                             checked={selectedAddons.map((addon) => addon.name).includes(addon.addon.name)}
-                            className=""
+                            className="accent-PurplishBlue w-6 h-6"
                         />
                         <div className='flex flex-auto flex-col' >
-                            <h2 className="font-bold">{addon.addon.name}</h2>
+                            <h2>{addon.addon.name}</h2>
                             <p className="text-CoolGray">{addon.addon.description}</p>
                         </div>
                         <p className="text-PurplishBlue">{addon.price}</p>

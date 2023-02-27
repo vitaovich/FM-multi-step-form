@@ -22,7 +22,7 @@ const StepFourForm: React.FC<{ plan: Plan, addons: Addon[], isYearly: boolean }>
             <div className="flex flex-col bg-Alabaster rounded-md p-4 space-y-6">
                 <div className="flex flex-row items-center">
                     <div className="flex flex-col flex-auto">
-                        <h1 className="font-bold">{pageInfo.header}</h1>
+                        <h2>{pageInfo.header}</h2>
                         <p className="text-CoolGray underline hover:text-PurplishBlue">Change</p>
                     </div>
                     <p className="font-bold">{pageInfo.plan}</p>

@@ -8,7 +8,7 @@ const StepOneInput: React.FC<{ id: string, label: string, placeHolder: string, v
     return (
         <div className='flex flex-col space-y-2'>
             <div className="flex flex-row justify-between">
-                <label htmlFor={props.id} className=''>{props.label}</label>
+                <label htmlFor={props.id} className='font-semibold'>{props.label}</label>
                 {props.hasError && <p className="text-StrawberryRed">{props.validationMessage}</p>}
             </div>
             <input
