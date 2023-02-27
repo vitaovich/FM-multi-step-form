@@ -1,11 +1,11 @@
 class Addon {
-    id: string
+    id: number
     name: string
     description: string
     price: number
 
-    constructor(name: string, description: string, price: number) {
-        this.id = name
+    constructor(id: number, name: string, description: string, price: number) {
+        this.id = id
         this.name = name
         this.description = description
         this.price = price

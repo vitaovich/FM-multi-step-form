@@ -1,58 +1,53 @@
 // import iconArcade from "../public/images/icon-arcade.svg"
 import Addon from "@/models/Addon"
 import { RefObject, useState } from "react"
+import StepThreeFormInput from "./stepThreeFormInput"
 
 const StepThreeForm: React.FC<{ selectedAddons: Addon[], addonHandler: (addon: Addon[]) => void, yearly: boolean, formValidHandler: (isValid: boolean) => void, buttonRef: RefObject<HTMLButtonElement>}> = (props) => {
+    const [selectedAddons, setSelectedAddons] = useState<Addon[]>(props.selectedAddons)
     const [addons, setAddons] = useState<Addon[]>(
         [
-            new Addon('Online service', 'Access to multiplayer games', 1),
-            new Addon('Larger storage', 'Extra 1TB of cloud save', 2),
-            new Addon('Customizable Profile', 'Custom theme on your profile', 3),
+            new Addon(1, 'Online service', 'Access to multiplayer games', 1),
+            new Addon(2, 'Larger storage', 'Extra 1TB of cloud save', 2),
+            new Addon(3, 'Customizable Profile', 'Custom theme on your profile', 3),
         ]
     )
-    const formattedAddons = addons.map((addon) => (
-        { addon: addon, price: `+$${props.yearly ? addon.price * 10 : addon.price}/${props.yearly ? 'yr' : 'mo'}` }
-    )
-    )
-    const [selectedAddons, setSelectedAddons] = useState<Addon[]>(props.selectedAddons)
 
-    const onClickAddonHandler = (addon: Addon) => {
-        if (!selectedAddons.map((addon) => addon.name).includes(addon.name)){
-            setSelectedAddons((prev) => ([addon, ...prev]))
+    const formatPrice = (price: number, isYearly: boolean) => {
+        return `+$${props.yearly ? price * 10 : price}/${isYearly ? 'yr' : 'mo'}`
+    }
+
+    const onCheckHandler = (id:number, isChecked: boolean) => {
+        if (isChecked) {
+            let addon = addons.filter(addon => addon.id === id)
+            setSelectedAddons(prev => ([...addon, ...prev]))
         } else {
-            setSelectedAddons((prev) => {
-                const removeIndex = prev.map((addon) => addon.name).indexOf(addon.name)
-                prev.splice(removeIndex, 1)
-                return [...prev]
-            })
+            setSelectedAddons(prev => (
+                prev.filter(addon => addon.id !== id)
+            ))
         }
     }
 
     const onSubmit = () => {
         props.formValidHandler(true)
-        props.addonHandler(selectedAddons)
+        props.addonHandler(selectedAddons.sort((a,b) => a.id - b.id))
     }
 
     return (
         <div className="flex flex-col space-y-4">
             {
-                formattedAddons.map((addon) => (
-                    <div key={addon.addon.name} className={`flex flex-row items-center border rounded-lg space-x-4 p-4 hover:border-PurplishBlue ${selectedAddons.map((addon) => addon.name).includes(addon.addon.name) ? 'bg-PurplishBlue/5 border-PurplishBlue' : ''}`} onClick={() => onClickAddonHandler(addon.addon)}>
-                        <input
-                            type="checkbox"
-                            name="check"
-                            checked={selectedAddons.map((addon) => addon.name).includes(addon.addon.name)}
-                            className="accent-PurplishBlue w-6 h-6"
-                        />
-                        <div className='flex flex-auto flex-col' >
-                            <h2>{addon.addon.name}</h2>
-                            <p className="text-CoolGray">{addon.addon.description}</p>
-                        </div>
-                        <p className="text-PurplishBlue">{addon.price}</p>
-                    </div>
+                addons.map((addon) => (
+                    <StepThreeFormInput
+                    key={addon.id} 
+                    id={addon.id} 
+                    name={addon.name} 
+                    description={addon.description} 
+                    price={formatPrice(addon.price, props.yearly)} 
+                    checked={selectedAddons.some(cur => cur.id === addon.id)} 
+                    onCheckHandler={onCheckHandler} />
                 ))
             }
-            <button ref={props.buttonRef} onClick={onSubmit} className="hidden">Next Step</button>
+            <button ref={props.buttonRef} onClick={onSubmit} className="hidden"></button>
         </div>
     )
 }
