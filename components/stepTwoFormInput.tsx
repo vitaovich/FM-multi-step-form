@@ -1,9 +1,12 @@
 import Image from "next/image"
 import Plan from "@/models/Plan";
 
-const StepTwoFormInput: React.FC<{img: any, plan: Plan, title: string, description: string, isYearly: boolean, selected: boolean, onClickHandler: (plan: Plan) => void}> = (props) => {
+const StepTwoFormInput: React.FC<{img: any, id: number, title: string, description: string, isYearly: boolean, selected: boolean, onUpdateSelectedPlan: (id: number) => void}> = (props) => {
+    const onClickHandler = () => {
+        props.onUpdateSelectedPlan(props.id)
+    }
     return (
-        <div className="flex-1 group" onClick={() => props.onClickHandler(props.plan)}>
+        <div className="flex-1 cursor-pointer" onClick={onClickHandler}>
             <div className={`flex flex-row md:flex-col border rounded-lg p-4 group-hover:border-PurplishBlue ${props.selected ? 'bg-PurplishBlue/5 border-PurplishBlue }' : ''}`}>
                 <Image
                     alt="arcade icon"

@@ -7,26 +7,28 @@ import StepTwoFormInput from "./stepTwoFormInput"
 
 const StepTwoForm: React.FC<{ selectedPlan: Plan, buttonRef: RefObject<HTMLButtonElement>, addPlanHandler: (plan: Plan) => void, yearly: boolean, yearlyHandler: (yearly: boolean) => void, formValidHandler: (isValid: boolean) => void }> = (props) => {
     const [isYearly, setYearly] = useState<boolean>(props.yearly);
+    const [selectedPlan, setSelectedPlan] = useState<Plan>(props.selectedPlan)
     const [plans, setPlans] = useState<Plan[]>(
         [
-            new Plan('Arcade', 9, iconArcade),
-            new Plan('Advanced', 12, iconAdvanced),
-            new Plan('Pro', 15, iconPro),
+            new Plan(1, 'Arcade', 9, iconArcade),
+            new Plan(2, 'Advanced', 12, iconAdvanced),
+            new Plan(3, 'Pro', 15, iconPro),
         ]
     )
-    const formattedPlans = plans.map((plan) =>
-    (
-        { plan: plan, description: `$${isYearly ? plan.price * 10 : plan.price}/${isYearly ? 'yr' : 'mo'}` }
-    )
-    )
-    const [selectedPlan, setSelectedPlan] = useState<Plan>(props.selectedPlan)
+
+    const formatPrice = (price: number, isYearly: boolean) => {
+        return `$${isYearly ? price * 10 : price}/${isYearly ? 'yr' : 'mo'}`
+    }
 
     const onClickYearlyHandler = () => {
         setYearly((prev) => (!prev))
     }
 
-    const onClickPlanHandler = (plan: Plan) => {
-        setSelectedPlan(plan)
+    const onClickPlanHandler = (id: number) => {
+        let selectedPlan = plans.find(plan => plan.id === id)
+        if (selectedPlan) {
+            setSelectedPlan(selectedPlan)
+        }
     }
 
     const onSubmit = () => {
@@ -40,8 +42,17 @@ const StepTwoForm: React.FC<{ selectedPlan: Plan, buttonRef: RefObject<HTMLButto
 
             <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:space-x-4">
                 {
-                    formattedPlans.map((formattedPlan) => (
-                        <StepTwoFormInput img={formattedPlan.plan.img} key={formattedPlan.plan.name} plan={formattedPlan.plan} title={formattedPlan.plan.name} description={formattedPlan.description} isYearly={isYearly} selected={formattedPlan.plan.name === selectedPlan.name} onClickHandler={onClickPlanHandler} />
+                    plans.map((plan) => (
+                        <StepTwoFormInput
+                            img={plan.img}
+                            key={plan.name}
+                            id={plan.id}
+                            title={plan.name}
+                            description={formatPrice(plan.price, isYearly)}
+                            isYearly={isYearly}
+                            selected={plan.name === selectedPlan.name}
+                            onUpdateSelectedPlan={onClickPlanHandler}
+                        />
                     ))
                 }
             </div>
